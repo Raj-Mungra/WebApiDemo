@@ -1,0 +1,110 @@
+﻿@model WebApiDemo.Models.StudentData
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
+
+
+</head>
+
+<form>
+    <div class="form-horizontal">
+        <h4>StudentData</h4>
+        <hr />
+
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Student Id</label>
+            </div>
+            <div class="col-md-1">
+                <input type="text" id="id" value="@Model.StudentID" disabled>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Student Name</label>
+            </div>
+            <div class="col-md-1">
+                <input type="text" id="name" value="@Model.Name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Student Class</label>
+            </div>
+            <div class="col-md-1">
+                <input type="text" id="class" value="@Model.Class">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" id="submit" />
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        @Html.ActionLink("Back to List", "Index", "Home")
+    </div>
+
+</form>
+
+
+<script>
+
+
+    $(document).ready(function () {
+        $("#submit").click(function (e) {
+            e.preventDefault();
+
+            var id = $("#id").val();
+            var name = $("#name").val();
+            var class_name = $("#class").val();
+
+            // console.log("Details : " + id + name + class_name);
+
+            if (name == "" || class_name == "")
+                alert("Please fill all details");
+            else
+            {
+                console.log("Inside else");
+                $.ajax({
+                    type: "PUT",
+                    url: "http://localhost:49484/api/values/"+id,
+                    data: JSON.stringify([id,name, class_name]),
+                    contentType: 'application/json; charset=utf-8',
+                    accept: 'application/json',
+                    success: function (data) {
+                        
+                        alert('Success');
+                        window.location.href = "http://localhost:49484/Home/Index?pageNumber=0";
+                    },
+
+                    error: function (xhr, status, data) {
+                        console.log("err", xhr.responseText, xhr.statusCode, data, status);
+
+                    }
+                });
+
+            }
+
+
+        });
+    });
+
+
+</script>
