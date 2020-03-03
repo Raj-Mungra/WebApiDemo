@@ -81,7 +81,6 @@ namespace WebApiTest.Controllers
             return View();
         }
 
-
         [HttpPost]
         public async Task<ActionResult> Create(StudentData studentData)
         {
@@ -89,39 +88,22 @@ namespace WebApiTest.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
-             
+
                 client.DefaultRequestHeaders.Clear();
 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //var stringPayload = await Task.Run(() => JsonConvert.SerializeObject(studentData));
+                //var dataJson = new StringContent(stringPayload,Encoding.UTF8, "application/json");
+                //HttpResponseMessage Res = await client.PostAsync("api/values",dataJson);
 
-                HttpResponseMessage Res = await client.PostAsync("api/values", content);
-
-               // var result = postTask.Result;
-                if (Res.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("Index");
-                }
-
-           }
-
-
+                // var result = postTask.Result;
+                //if (Res.IsSuccessStatusCode)
+                //{
+                //    return RedirectToAction("Index");
+                //}
+            }
             return View(studentData);
         }
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public ActionResult About()
         {
