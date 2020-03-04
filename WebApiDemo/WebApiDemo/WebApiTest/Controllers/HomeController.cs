@@ -92,18 +92,10 @@ namespace WebApiTest.Controllers
                 client.DefaultRequestHeaders.Clear();
 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                //var stringPayload = await Task.Run(() => JsonConvert.SerializeObject(studentData));
-                //var dataJson = new StringContent(stringPayload,Encoding.UTF8, "application/json");
-                //HttpResponseMessage Res = await client.PostAsync("api/values",dataJson);
-
-                // var result = postTask.Result;
-                //if (Res.IsSuccessStatusCode)
-                //{
-                //    return RedirectToAction("Index");
-                //}
             }
             return View(studentData);
         }
+
 
         public ActionResult About()
         {
