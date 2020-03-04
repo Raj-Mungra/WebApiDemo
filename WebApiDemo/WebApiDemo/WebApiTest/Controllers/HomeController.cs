@@ -94,6 +94,7 @@ namespace WebApiTest.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             }
             return View(studentData);
+
         }
 
 
